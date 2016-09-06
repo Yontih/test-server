@@ -11,4 +11,4 @@ router.get('/', function *() {
 });
 
 app.use(router.routes())
-    .listen(8080);
+    .listen(process.env.PORT || 8080);
