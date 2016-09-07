@@ -3,8 +3,9 @@
 const koa = require('koa');
 const Router = require('koa-router');
 const Promise = require('bluebird');
-
 const pg = require('pg');
+const logger = require('log4js').getLogger('server');
+
 pg.defaults.ssl = true;
 
 let dbErr = null;
@@ -61,5 +62,8 @@ router.get('/env', function *() {
     this.body = process.env;
 });
 
+let port = process.env.PORT || 5485;
 app.use(router.routes())
-    .listen(process.env.PORT || 5485);
+    .listen(port, () => {
+        logger.info(`Server is up on port ${port}`);
+    });
