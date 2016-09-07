@@ -57,5 +57,9 @@ router.get('/data', function *() {
 
 });
 
+router.get('/env', function *() {
+    this.body = process.env;
+});
+
 app.use(router.routes())
     .listen(process.env.PORT || 5485);
